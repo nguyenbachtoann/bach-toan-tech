@@ -1,0 +1,246 @@
+// styles
+@import "variables";
+@import "mixins";
+
+#fullpage-loading-img {
+  width: 100%;
+  height: 100vh;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+#main-menu {
+  @include flexJustifyAndAlignWithFont($fontMedium, flex-end, unset);
+  border: none;
+  line-height: 80px;
+  // selected menu
+  li {
+    border-bottom: none;
+    .anticon {
+      font-size: $fontMedium;
+    }
+  }
+}
+
+.menu-title {
+  line-height: 80px;
+  color: dimgray;
+  font-size: $fontMedium;
+}
+
+#home-banner {
+  @include flexJustifyAndAlignWithFont(unset, flex-start, unset);
+  img {
+    @include imageFullSizeWithBorderRadius(unset);
+  }
+}
+
+#home-introduction {
+  margin-top: 50px;
+}
+
+.introduction-wrapper {
+  @include flexJustifyAndAlignWithFont($fontMedium, flex-end, center);
+  font-weight: $fontWeightSmall;
+  flex-direction: column;
+  .intro-title {
+    margin-bottom: 20px;
+    text-align: center;
+    .title-span {
+      font-size: $fontXXLarge;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+  }
+  .intro-content {
+    text-align: center;
+  }
+}
+.weather-wrapper {
+  #weather-container {
+    @include flexJustifyAndAlignWithFont($fontMedium, flex-start, center);
+    font-weight: $fontWeightSmall;
+    flex-direction: column;
+    .weather-content {
+      width: 100%;
+      .weather-description {
+        width: 100%;
+        @include flexJustifyAndAlignWithFont(unset, space, center);
+        flex-direction: column;
+      }
+      .loading-data {
+        margin-top: 30px;
+        color: $primaryColor;
+      }
+      .weather-title-divide {
+        width: 25%;
+        padding-top: 10px;
+        @include flexJustifyAndAlignWithFont(unset, space-around, center);
+      }
+
+      .weather-celcius {
+        font-size: $fontExtraLarge;
+      }
+    }
+  }
+}
+
+.intro-contact {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.text-title-thin {
+  text-underline-position: below;
+  font-size: $fontLarge;
+  font-weight: 600;
+}
+
+.button-group {
+  margin-bottom: 20px;
+  width: 100%;
+  @include flexJustifyAndAlignWithFont(unset, center, unset);
+  .button-wrapper {
+    width: 100%;
+    @include flexJustifyAndAlignWithFont(unset, center, unset);
+    .button-wrapper-row {
+      width: 50%;
+      @include flexJustifyAndAlignWithFont(unset, space-around, unset);
+      @include linkTagHoverNoColorEffect(inherit, inherit);
+      .button-instagram {
+        color: white;
+        background: #f09433;
+        background: -moz-linear-gradient(
+          45deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
+        background: -webkit-linear-gradient(
+          45deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
+        background: linear-gradient(
+          45deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+      }
+      .button-facebook {
+        color: white;
+        background-color: #1778f2;
+        @include linkTagHoverNoColorEffect(unset, white);
+      }
+      button {
+        &:hover {
+          box-shadow: 0 6px 6px -6px gray;
+        }
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+.ant-col .button-wrapper-col {
+  @include flexJustifyAndAlignWithFont(unset, center, unset);
+}
+
+.hobbies-col {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.hobbies-item {
+  height: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 20px 20px 40px -30px $shadowColor;
+  margin: 20px;
+  @include hoverMoveUp();
+}
+
+.hobbies-title {
+  @include flexJustifyAndAlignWithFont(unset, center, unset);
+  margin-bottom: 20px;
+}
+
+#hobbies-tweenone {
+  // float: left;
+  width: 100%;
+  opacity: 0;
+  margin-bottom: 50px;
+  img {
+    @include imageFullSizeWithBorderRadius(20px);
+  }
+}
+
+.hobbies-img-container {
+  height: 70%;
+}
+.hobbies-content-container {
+  border-radius: 20px;
+  height: 30%;
+  @include flexJustifyAndAlignWithFont(unset, center, center);
+  span {
+    font-size: $fontLarge;
+    font-weight: $fontWeightRegular;
+  }
+}
+
+.hobbies-queue {
+  position: relative;
+  margin-bottom: 10;
+  @include flexJustifyAndAlignWithFont(unset, center, unset);
+}
+#hobbies-overpack {
+  overflow: hidden;
+}
+.infor-title {
+  font-size: $fontExtraLarge;
+  font-weight: $fontWeightLarge;
+}
+.infor-description-container {
+  @include clearFix();
+  text-align: center;
+  .infor-description {
+    font-size: $fontMedium;
+    font-weight: $fontWeightSmall;
+  }
+}
+
+footer {
+  margin-top: 100px;
+  height: 100px;
+  @include clearFix();
+  .footer-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    @include flexJustifyAndAlignWithFont($fontSmall, center, center);
+    span {
+      font-weight: $fontWeightSmall;
+    }
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .title-span {
+    font-size: $fontExtraLarge !important;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .title-span {
+    font-size: $fontExtraLarge !important;
+  }
+}
