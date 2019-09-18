@@ -3,7 +3,7 @@ import Constants from "../../../constants/index";
 import axios from "axios";
 import { Icon } from "antd";
 
-const WEATHER_URL_ASSET = "https://openweathermap.org/img/wn/";
+const WEATHER_URL_ASSET = Constants.WEATHER_URL_ASSET;
 const DATE_NAME = Constants.DATE_NAME;
 class Weather extends Component {
   constructor(props) {
@@ -21,7 +21,8 @@ class Weather extends Component {
         icon: undefined,
         tempC: undefined,
         tempF: undefined,
-        date: undefined
+        day: undefined,
+        place: undefined
       },
       isFetching: false,
       isGeoEnabled: true
@@ -46,9 +47,8 @@ class Weather extends Component {
   getCurrentDateTime = () => {
     const { resultData } = this.state;
     const current = new Date();
-    const date = current.getDate();
-
-    resultData.date = DATE_NAME[date - 1];
+    const day = current.getDay();
+    resultData.day = DATE_NAME[day];
     this.setState({
       resultData
     });
@@ -88,6 +88,7 @@ class Weather extends Component {
       resultData.title = firstCondition.main;
       resultData.description = firstCondition.description;
       resultData.icon = firstCondition.icon;
+      resultData.place = weatherData.name;
       this.setState({
         resultData
       });
@@ -96,7 +97,7 @@ class Weather extends Component {
 
   getWeather = async () => {
     const { location } = this.state;
-    const API_KEY = Constants.WEATHER_API;
+    const API_KEY = Constants.WEATHER_KEY;
 
     this.setState({
       isFetching: true
@@ -106,8 +107,8 @@ class Weather extends Component {
         `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&appid=${API_KEY}`
       )
       .then(res => {
-        console.log("location: ", res.data);
         setTimeout(() => {
+          console.log("SDDSDD: ", res);
           this.setState(
             {
               weatherData: res.data,
@@ -121,6 +122,13 @@ class Weather extends Component {
       })
       .catch(err => {
         console.log("SS: ", err.status);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.setState({
+            isFetching: false
+          });
+        }, 800);
       });
   };
 
@@ -132,7 +140,7 @@ class Weather extends Component {
         <div className="weather-content">
           {isGeoEnabled === false ? (
             <div className="weather-description">
-              <span className="content-span" title="weather-date">
+              <span className="content-span" title="weather-day">
                 {error}
               </span>
             </div>
@@ -144,15 +152,21 @@ class Weather extends Component {
             <div className="weather-description">
               <div className="weather-title-divide">
                 <span className="content-span" title="weather-main-type">
-                  {resultData.title}
+                  {resultData.place}
                 </span>
                 <span className="content-span" title="weather-div">
                   |
                 </span>
-                <span className="content-span" title="weather-date">
-                  {resultData.date}
+                <span className="content-span" title="weather-day">
+                  {resultData.day}
                 </span>
               </div>
+              <span
+                className="content-span weather-place"
+                title="weather-place"
+              >
+                {resultData.title}
+              </span>
 
               {resultData.icon !== undefined && (
                 <img

@@ -7,10 +7,17 @@
   height: 100vh;
 }
 
+// flexJustifyAndAlignWithFont(a,b,c) , a is font-size, b is justify-content and c is align-items
+
 .font-bold {
   font-weight: 600;
 }
 
+#img-menu {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
 #main-menu {
   @include flexJustifyAndAlignWithFont($fontMedium, flex-end, unset);
   border: none;
@@ -26,8 +33,10 @@
 
 .menu-title {
   line-height: 80px;
-  color: dimgray;
+  color: black;
   font-size: $fontMedium;
+  display: flex;
+  align-items: center;
 }
 
 #home-banner {
@@ -35,6 +44,10 @@
   img {
     @include imageFullSizeWithBorderRadius(unset);
   }
+}
+
+.home-body {
+  margin-bottom: 50px;
 }
 
 #home-introduction {
@@ -48,15 +61,15 @@
   .intro-title {
     margin-bottom: 20px;
     text-align: center;
-    .title-span {
-      font-size: $fontXXLarge;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-    }
   }
   .intro-content {
     text-align: center;
   }
+}
+.title-span {
+  font-size: $fontXXLarge;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 }
 .weather-wrapper {
   #weather-container {
@@ -81,6 +94,10 @@
       }
 
       .weather-celcius {
+        font-size: $fontExtraLarge;
+      }
+      .weather-place {
+        margin-top: 20px;
         font-size: $fontExtraLarge;
       }
     }
@@ -219,8 +236,7 @@
 }
 
 footer {
-  margin-top: 100px;
-  height: 100px;
+  height: 80px;
   @include clearFix();
   .footer-container {
     width: 100%;
@@ -233,13 +249,347 @@ footer {
   }
 }
 
-@media only screen and (max-width: 414px) {
-  .title-span {
-    font-size: $fontExtraLarge !important;
+// To do
+
+#todo-container {
+  // background-color: #1778f2;
+  width: 100%;
+}
+
+#todo-wrapper {
+  .todos-list-options-menu {
+    @include flexJustifyAndAlignWithFont(unset, center, center);
+  }
+  .todo-priorities {
+    @include flexJustifyAndAlignWithFont(unset, center, center);
   }
 }
 
-@media only screen and (max-width: 425px) {
+.todo-title {
+  height: 100px;
+  @include flexJustifyAndAlignWithFont(unset, center, center);
+}
+
+.priorities-wrapper {
+  width: 20%;
+  @include flexJustifyAndAlignWithFont(unset, space-around, flex-start);
+  .priorities {
+    margin-bottom: 40px;
+    @include flexJustifyAndAlignWithFont($fontMedium, center, center);
+    div {
+      margin-right: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+    }
+    span {
+      margin-right: 20px;
+    }
+  }
+}
+
+.list-item {
+  // background-color: white;
+  // @include flexJustifyAndAlignWithFont(unset, center, unset);
+  border-radius: 30px;
+  box-shadow: 20px 20px 40px -30px $shadowColor;
+  padding: 20px;
+  margin-bottom: 20px;
+  .list-item-title {
+    margin-bottom: 10px;
+  }
+  .list-description {
+    margin-bottom: 10px;
+  }
+  position: relative;
+  transition: box-shadow 0.5s linear;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 20px 20px 60px -20px $shadowColor;
+  }
+  #btn-task-box-cancel {
+    float: right;
+    transition: visibility 0.6s, opacity 0.6s linear;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .list-tasks-options {
+    transition: margin-top 0.6s, visibility 0.6s, opacity 0.6s linear;
+    margin-top: -20px;
+    visibility: hidden;
+    opacity: 0;
+    // @include flexJustifyAndAlignWithFont(unset, space-around, center);
+  }
+  .todos-divider {
+    transition: margin-top 0.6s, visibility 0.6s, opacity 0.6s linear;
+    margin-top: -20px;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+#hidden-item {
+  transition: height 0.8s, visibility 2s, opacity 2s, overflow 0.6s,
+    margin-top 0.6s linear;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  height: 0;
+  margin-top: 0;
+  .todos-col {
+    @include flexJustifyAndAlignWithFont($fontMedium, flex-start, flex-start);
+    .todos-checkbox {
+      margin-right: 10px;
+    }
+  }
+  label {
+    margin-top: 5px;
+  }
+  .color-props {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+}
+
+.list-col {
+  transition: height 0.6s, width 0.6s;
+  // max-height: auto;
+  &:focus-within {
+    width: 30%;
+    height: 600px;
+    outline: 0;
+    .list-item {
+      position: relative;
+      box-shadow: 20px 20px 60px -20px $shadowColor;
+    }
+    #btn-task-box-cancel {
+      visibility: visible;
+      opacity: 1;
+    }
+    .list-item-title {
+      @include flexJustifyAndAlignWithFont($fontExtraLarge, center, flex-start);
+    }
+    .list-description {
+      @include flexJustifyAndAlignWithFont($fontLarge, center, flex-start);
+    }
+    .list-tasks-options {
+      margin-top: 20px;
+      visibility: visible;
+      opacity: 1;
+    }
+    .todos-divider {
+      margin-top: 20px;
+      visibility: visible;
+      opacity: 1;
+    }
+    #hidden-item {
+      height: 250px;
+      visibility: visible;
+      opacity: 1;
+      overflow: hidden;
+      margin-top: 30px;
+
+      // @include flexJustifyAndAlignWithFont($fontMedium, center, unset);
+    }
+  }
+
+  .list-item-title,
+  .list-description,
+  .list-tasks-count {
+    @include flexJustifyAndAlignWithFont(unset, center, unset);
+    transition: font-size 0.6s;
+  }
+}
+
+// .item-title{
+//   transition: width 1s, height 1s, font-size 1s, font-weight 1s;
+//   &:focus {
+//     width: 100%;
+//     outline: 0;
+//   }
+// }
+
+.content-span {
+  font-size: $fontMedium;
+  font-weight: $fontWeightSmall;
+}
+.date-time {
+  // font-size: $fontMedium;
+  font-weight: $fontWeightRegular;
+  color: darkgray;
+}
+
+// Radio
+
+#radio-container {
+  width: 100%;
+  background-image: url("../assets/images/radio-background.jpg");
+  background-repeat: repeat;
+  margin-bottom: 50px;
+  border-radius: 30px;
+}
+
+.radio-title {
+  width: 100%;
+  height: 200px;
+  @include flexJustifyAndAlignWithFont(unset, center, center);
+  .title-wrapper {
+    @include flexJustifyAndAlignWithFont(unset, center, center);
+
+    width: 60%;
+    height: 80px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 30px 30px 40px -35px black;
+    text-align: center;
+    span {
+      color: blue;
+    }
+  }
+}
+
+.video-wrapper {
+  @include flexJustifyAndAlignWithFont(unset, center, unset);
+  position: relative;
+  padding-bottom: 35%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    width: 60%;
+    height: 90%;
+  }
+  iframe {
+    border-radius: 30px;
+    box-shadow: 30px 30px 40px -30px black;
+  }
+}
+
+.list-videos-container {
+  padding-bottom: 100px;
+  @include flexJustifyAndAlignWithFont(unset, center, center);
+  width: 100%;
+  .list-videos-wrapper {
+    text-align: center;
+    flex-direction: column;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    width: 60%;
+    box-shadow: 30px 30px 40px -35px black;
+    @include flexJustifyAndAlignWithFont(unset, center, center);
+    .list-videos-title {
+      span {
+        color: blue;
+      }
+    }
+    .list-videos {
+      width: 90%;
+      text-align: center;
+      height: 350px;
+      overflow-y: scroll;
+
+      @include flexJustifyAndAlignWithFont(unset, center, center);
+      .list-video-items {
+        height: 60px;
+        background-color: white;
+        border-radius: 10px;
+        margin: 5px;
+        width: 90%;
+
+        @include flexJustifyAndAlignWithFont($fontLarge, center, center);
+        .ant-col {
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+.videos-container-inner {
+  @include flexJustifyAndAlignWithFont(unset, center, center);
+  padding-bottom: 50px;
+  padding-top: 30px;
+  width: 70%;
+}
+
+.list-videos::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+  margin-top: 10px;
+}
+
+.list-videos::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.list-videos::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+}
+
+// media to make shits fit its place
+
+@media only screen and (min-width: 320px) and (max-width: 425px) {
+  .title-span {
+    font-size: $fontExtraLarge !important;
+  }
+  .radio-title {
+    .title-wrapper {
+      box-shadow: 30px 30px 40px -35px black;
+      width: 90%;
+    }
+  }
+
+  .video-wrapper {
+    iframe,
+    object,
+    embed {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .radio-title {
+    .title-wrapper {
+      box-shadow: 30px 30px 40px -35px black;
+      span {
+        font-size: $fontExtraLarge !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .radio-title {
+    .title-wrapper {
+      width: 90%;
+      box-shadow: 30px 30px 40px -35px black;
+    }
+  }
+
+  .video-wrapper {
+    iframe,
+    object,
+    embed {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1580px) {
+  .button-wrapper-row {
+    width: 65% !important;
+  }
   .title-span {
     font-size: $fontExtraLarge !important;
   }

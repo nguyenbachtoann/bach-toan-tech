@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Constant from "../../../constants/index";
+import Constants from "../../../constants/index";
 import { Button, Row, Col, Icon } from "antd";
 import Weather from "./Weather";
 
-const buttonLinks = Constant.BUTTON_INFORMATION_LINK;
+const buttonLinks = Constants.BUTTON_INFORMATION_LINK;
 class Introduction extends Component {
   render() {
     return (
@@ -12,15 +12,15 @@ class Introduction extends Component {
           <div className="intro-title">
             <Row justify="center" type="flex">
               <Col span={18}>
-                <span className="title-span">{Constant.TITLE}</span>
+                <span className="title-span">{Constants.TITLE}</span>
               </Col>
             </Row>
           </div>
           <div className="intro-content">
-            <span className="content-span">{Constant.CONTENT}</span>
+            <span className="content-span">{Constants.CONTENT}</span>
           </div>
           <div className="text-title-thin intro-contact">
-            <span>{Constant.CONTACT}</span>
+            <span>{Constants.CONTACT}</span>
           </div>
           <div className="button-group">
             <div className="button-wrapper">

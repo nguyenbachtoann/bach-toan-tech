@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon, Row, Col } from "antd";
 import { NavLink } from "react-router-dom";
-
+import logo from "../../../assets/images/logo.png";
 const MENU = [
   {
     to: "/",
@@ -12,6 +12,11 @@ const MENU = [
     to: "/todo",
     content: "To Do",
     icon: "file-text"
+  },
+  {
+    to: "/radio",
+    content: "Radio",
+    icon: "audio"
   }
 ];
 class MainMenu extends Component {
@@ -22,35 +27,58 @@ class MainMenu extends Component {
     };
   }
 
-  handleClick = e => {
-    console.log("click ", e);
+  UNSAFE_componentWillMount() {
+    this.handleGetMenuFromSessionStorage();
+  }
 
+  handleGetMenuFromSessionStorage = () => {
+    const current = sessionStorage.getItem("chosenMenu");
     this.setState({
-      current: e.key
+      current: current === null ? "Home" : current
+    });
+  };
+
+  handleSetMenuToSessionStorage = e => {
+    const chosenMenu = e.key;
+    sessionStorage.setItem("chosenMenu", chosenMenu);
+    this.setState({
+      current: chosenMenu
+    });
+  };
+
+  resetMenuState = () => {
+    sessionStorage.removeItem("chosenMenu");
+    this.setState({
+      current: "Home"
     });
   };
   render() {
     const { current } = this.state;
     return (
-      <Row>
+      <Row id="menu-container">
         <Col span={8} offset={1}>
           <div className="menu-title">
-            <NavLink to="/">
-              <span className="menu-title font-bold">Bach Toan</span>
+            <img src={logo} id="img-menu" />
+            <NavLink to="/" onClick={this.resetMenuState}>
+              <span className="menu-title font-bold">toanmr.</span>
             </NavLink>
           </div>
         </Col>
         <Col span={6} offset={8}>
           <Menu
             id="main-menu"
-            onClick={this.handleClick}
+            onClick={this.handleSetMenuToSessionStorage}
             selectedKeys={[current]}
             mode="horizontal"
           >
             {MENU.map((menu, i) => {
               return (
-                <Menu.Item key={menu.content} className="menu-item font-bold">
-                  <NavLink to={menu.to}>
+                <Menu.Item
+                  key={menu.content}
+                  className="menu-item font-bold"
+                  title={menu.content}
+                >
+                  <NavLink to={menu.to} activeClassName="active">
                     <Icon type={menu.icon} />
                     {menu.content}
                   </NavLink>

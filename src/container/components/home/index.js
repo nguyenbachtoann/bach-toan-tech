@@ -94,12 +94,7 @@ class Home extends Component {
             </div>
           </QueueAnim>
         </OverPack>
-        <footer>
-          <div className="footer-container">
-            <span>This website was powered by, React JS, Redux, Java and more assets, APIs from the Internet. &copy; Nguyen Bach Toan </span>
-
-          </div>
-        </footer>
+        
       </div>
     );
   }

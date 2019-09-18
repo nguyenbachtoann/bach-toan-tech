@@ -10,7 +10,7 @@ module.exports = override(
     javascriptEnabled: true,
     modifyVars: {
       "@primary-color": "#1890ff",
-      "@text-color": "rgba(0, 0, 0, 0.65)",
+      "@text-color": "rgba(0, 0, 0, 1)",
       "@text-color-secondary": "rgba(0, 0, 0, .45)"
     }
   })
